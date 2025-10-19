@@ -2,11 +2,10 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { createGoal as createGoalApi, getGoals } from '../../../../api/lib'
+import { getGoals } from '../../../../api/lib'
 import { createGoal as createGoalRedux, selectGoalsList } from '../../../../store/goalsSlice'
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import {
-  setContent as setContentRedux,
   setIsOpen as setIsOpenRedux,
   setType as setTypeRedux,
 } from '../../../../store/modalSlice'
@@ -26,15 +25,9 @@ export default function GoalsSection() {
     fetch()
   }, [dispatch])
 
-  const onClick = async () => {
-    const goal = await createGoalApi()
-
-    if (goal != null) {
-      dispatch(createGoalRedux(goal))
-      dispatch(setContentRedux(goal))
-      dispatch(setTypeRedux('Goal'))
-      dispatch(setIsOpenRedux(true))
-    }
+  const onClick = () => {
+    dispatch(setTypeRedux('CreateGoal'))
+    dispatch(setIsOpenRedux(true))
   }
 
   return (

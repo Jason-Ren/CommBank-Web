@@ -31,11 +31,12 @@ export async function getGoals(): Promise<Goal[] | null> {
   }
 }
 
-export async function createGoal(): Promise<Goal | null> {
+export async function createGoal(icon?: string | null): Promise<Goal | null> {
   try {
     const response = await axios.post(`${API_ROOT}/api/Goal`, {
       userId: user.id,
       targetDate: new Date(),
+      icon: icon || null,
     })
     return response.data
   } catch (error: any) {

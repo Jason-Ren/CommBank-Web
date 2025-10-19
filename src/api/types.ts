@@ -65,5 +65,5 @@ export enum ApplicationStatus {
   Rejected,
 }
 
-export type ModalContent = Goal
-export type ModalType = 'Goal'
+export type ModalContent = Goal | null
+export type ModalType = 'Goal' | 'CreateGoal'

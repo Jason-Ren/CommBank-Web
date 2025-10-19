@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Goal } from '../../../api/types'
 import { useAppSelector } from '../../../store/hooks'
 import { selectContent, selectIsOpen, selectType } from '../../../store/modalSlice'
+import { CreateGoalForm } from '../../features/goalmanager/CreateGoalForm'
 import { GoalManager } from '../../features/goalmanager/GoalManager'
 
 export default function Modal() {
@@ -14,10 +15,12 @@ export default function Modal() {
     switch (type) {
       case 'Goal':
         return <GoalManager goal={content as Goal} />
+      case 'CreateGoal':
+        return <CreateGoalForm />
     }
   }
 
-  if (!isOpen || content === null) return null
+  if (!isOpen || (type === 'Goal' && content === null)) return null
 
   const onClick = (event: React.MouseEvent) => event.stopPropagation()
 
